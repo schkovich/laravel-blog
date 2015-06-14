@@ -1,4 +1,5 @@
 <?php
+use LaravelBlog\Faker\Provider\Blog;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,24 +14,47 @@
 
 $factory->define(LaravelBlog\Blogger::class, function ($faker) {
     return [
-        'name' => $faker->name,
-	    'username' => $faker->username,
-        'email' => $faker->email,
-        'password' => str_random(10),
-	    'confirmation_code' => str_random(32),
-        'remember_token' => str_random(12),
+        'name'              => $faker->name,
+        'username'          => $faker->username,
+        'email'             => $faker->email,
+//      @todo: create bcrypt generator
+        'password'          => $faker->md5,
+        'confirmation_code' => $faker->md5,
+        'remember_token'    => $faker->md5,
     ];
 });
 
 $factory->defineAs('LaravelBlog\Blogger', 'admin', function ($faker) use ($factory) {
-	$user = $factory->raw('LaravelBlog\Blogger');
+    $user = $factory->raw('LaravelBlog\Blogger');
 
-	return array_merge($user, ['admin' => true]);
+    return array_merge($user, [ 'admin' => true ]);
 });
 
 
 $factory->defineAs('LaravelBlog\Blogger', 'confirmed', function ($faker) use ($factory) {
-	$user = $factory->raw('LaravelBlog\Blogger');
+    $user = $factory->raw('LaravelBlog\Blogger');
 
-	return array_merge($user, ['confirmed' => true]);
+    return array_merge($user, [ 'confirmed' => true ]);
+});
+
+$factory->define(LaravelBlog\Blog::class, function ($faker) {
+    $faker->addProvider(new Blog($faker));
+
+    return [
+        'title'        => $faker->title(6),
+        'slug'         => $faker->slug,
+        'introduction' => $faker->text(50),
+        'content'      => $faker->text(400),
+        'source'       => $faker->image($dir = 'photos', $width = 640, $height = 480, 'cats'),
+        'picture'      => $faker->image($dir = 'photos', $width = 640, $height = 480),
+    ];
+});
+
+$factory->define(LaravelBlog\BlogCategory::class, function ($faker) {
+    $faker->addProvider(new Blog($faker));
+
+    return [
+        'title' => $faker->title(3),
+        'slug'  => $faker->slug
+    ];
 });

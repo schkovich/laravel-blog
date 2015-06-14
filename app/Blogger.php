@@ -34,6 +34,9 @@ class Blogger extends Model implements AuthenticatableContract, CanResetPassword
 	protected $hidden = [ 'password', 'remember_token' ,'confirmation_code'  ];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
 	public function blogs()
 	{
 		return $this->hasMany('LaravelBlog\Blog');
