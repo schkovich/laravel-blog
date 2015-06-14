@@ -13,8 +13,18 @@ class CreateBloggersTable extends Migration
     public function up()
     {
         Schema::create('bloggers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->engine = 'InnoDB';
+		    $table->increments('id')->unsigned();
+	        $table->string('name');
+	        $table->string('username')->unique(); // used for slug.
+//	        @see http://www.rfc-editor.org/errata_search.php?rfc=3696&eid=1690
+	        $table->string('email', 254)->unique();
+	        $table->string('password', 60);
+	        $table->string('confirmation_code');
+	        $table->boolean('confirmed')->default(false);
+	        $table->boolean('admin')->default(false);
+	        $table->rememberToken();
+	        $table->timestamps();
         });
     }
 

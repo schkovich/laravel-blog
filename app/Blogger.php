@@ -24,12 +24,18 @@ class Blogger extends Model implements AuthenticatableContract, CanResetPassword
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = [ 'name', 'username', 'email', 'password', 'confirmed' ,'confirmation_code' ];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+	protected $hidden = [ 'password', 'remember_token' ,'confirmation_code'  ];
+
+
+	public function blogs()
+	{
+		return $this->hasMany('LaravelBlog\Blog');
+	}
 }
