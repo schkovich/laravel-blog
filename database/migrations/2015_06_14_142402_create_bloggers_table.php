@@ -20,7 +20,7 @@ class CreateBloggersTable extends Migration
 //	        @see http://www.rfc-editor.org/errata_search.php?rfc=3696&eid=1690
 	        $table->string('email', 254)->unique();
 	        $table->string('password', 60);
-	        $table->string('confirmation_code');
+	        $table->string('confirmation_code', 32);
 	        $table->boolean('confirmed')->default(false);
 	        $table->boolean('admin')->default(false);
 	        $table->rememberToken();
