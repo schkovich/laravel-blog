@@ -34,7 +34,7 @@ class Blog extends Model {
     }
 
     /**
-     * Get the post's author.
+     * Get the blogs's author.
      *
      * @return Blogger
      */

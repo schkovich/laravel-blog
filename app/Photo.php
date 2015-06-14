@@ -19,9 +19,9 @@ class Photo extends Model
     }
 
     /**
-     * Get the post's author.
+     * Get the blog's author.
      *
-     * @return User
+     * @return Blogger
      */
     public function author()
     {

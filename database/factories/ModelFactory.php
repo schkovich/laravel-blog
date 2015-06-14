@@ -78,3 +78,13 @@ $factory->define(\LaravelBlog\Photo::class, function ($faker) {
         'description' => $faker->text(250)
         ];
 });
+
+$factory->define(\LaravelBlog\Album::class, function ($faker) {
+    $faker->addProvider(new Blog($faker));
+    return [
+        'position' => $faker->unique()->randomDigitNotNull,
+        'name' => $faker->title(4),
+        'description' => $faker->text(180),
+        'folder_id' => str_random(120)
+    ];
+});
