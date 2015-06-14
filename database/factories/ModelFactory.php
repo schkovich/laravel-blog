@@ -63,6 +63,18 @@ $factory->define(LaravelBlog\Language::class, function ($faker) {
     return [
         'position' => $faker->unique()->randomDigitNotNull,
         'name' => $faker->language,
-        'lang_code' => $faker->languageCode
+        'lang_code' => $faker->languageCode,
+        'icon' => $faker->image($dir = '/images/languages', 'flags')
     ];
+});
+
+$factory->define(\LaravelBlog\Photo::class, function ($faker) {
+    $faker->addProvider(new Blog($faker));
+    return [
+        'position' => $faker->unique()->randomDigitNotNull,
+        'slider' => $faker->boolean(25),
+        'filename' => $faker->image('/images/photos', 1920, 1080, 'photos', true, 'Faker'),
+        'name' => $faker->title(3),
+        'description' => $faker->text(250)
+        ];
 });

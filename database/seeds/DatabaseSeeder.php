@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call('BloggerTableSeeder');
         $this->call('BlogTableSeeder');
         $this->call('BlogCategoryTableSeeder');
+        $this->call('LanguageTableSeeder');
+        $this->call('PhotoTableSeeder');
 
         Model::reguard();
     }
