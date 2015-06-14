@@ -58,3 +58,11 @@ $factory->define(LaravelBlog\BlogCategory::class, function ($faker) {
         'slug'  => $faker->slug
     ];
 });
+
+$factory->define(LaravelBlog\Language::class, function ($faker) {
+    return [
+        'position' => $faker->unique()->randomDigitNotNull,
+        'name' => $faker->language,
+        'lang_code' => $faker->languageCode
+    ];
+});
