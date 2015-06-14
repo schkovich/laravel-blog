@@ -4,7 +4,7 @@ namespace LaravelBlog;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Albums extends Model
+class Album extends Model
 {
     //
 }
