@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace LaravelBlog\Http\Controllers\Auth;
 
-use App\User;
+use LaravelBlog\Blogger;
 use Validator;
-use App\Http\Controllers\Controller;
+use LaravelBlog\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -51,11 +51,12 @@ class AuthController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     *
+*@return Blogger
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Blogger::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

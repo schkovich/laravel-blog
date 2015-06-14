@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: LaravelBlog
+        psr4_prefix: LaravelBlog
         src_path: app
