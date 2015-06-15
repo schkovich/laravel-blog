@@ -38,6 +38,6 @@ class CreateBlogsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('blogs');
+        Schema::dropIfExists('blogs');
     }
 }

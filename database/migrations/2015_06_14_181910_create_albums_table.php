@@ -24,7 +24,7 @@ class CreateAlbumsTable extends Migration
             $table->unsignedInteger('blogger_id')->nullable();
             $table->foreign('blogger_id')->references('id')->on('bloggers')->onDelete('set null');
             $table->unsignedInteger('blogger_id_edited')->nullable();
-            $table->foreign('blogger_id_edited')->references('id')->on('blogger')->onDelete('set null');
+            $table->foreign('blogger_id_edited')->references('id')->on('bloggers')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateAlbumsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('albums');
+        Schema::dropIfExists('albums');
     }
 }

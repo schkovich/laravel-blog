@@ -11,6 +11,6 @@ class LanguageTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('LaravelBlog\Language', 3)->create();
     }
 }

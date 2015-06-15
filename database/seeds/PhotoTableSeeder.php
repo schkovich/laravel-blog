@@ -11,6 +11,6 @@ class PhotoTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('LaravelBlog\Blogger', 54)->create();
     }
 }

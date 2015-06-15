@@ -39,14 +39,14 @@ $factory->defineAs('LaravelBlog\Blogger', 'confirmed', function ($faker) use ($f
 
 $factory->define(LaravelBlog\Blog::class, function ($faker) {
     $faker->addProvider(new Blog($faker));
-
+    $root = '/home/vagrant/laravel-blog/public';
     return [
         'title'        => $faker->title(6),
         'slug'         => $faker->slug,
         'introduction' => $faker->text(50),
         'content'      => $faker->text(400),
-        'source'       => $faker->image($dir = 'photos', $width = 640, $height = 480, 'cats'),
-        'picture'      => $faker->image($dir = 'photos', $width = 640, $height = 480),
+        'source'       => $faker->image($dir = "${root}/images/photos", $width = 640, $height = 480, 'cats'),
+        'picture'      => $faker->image($dir = "${root}/images/photos", $width = 640, $height = 480),
     ];
 });
 
@@ -60,20 +60,22 @@ $factory->define(LaravelBlog\BlogCategory::class, function ($faker) {
 });
 
 $factory->define(LaravelBlog\Language::class, function ($faker) {
+    $root = '/home/vagrant/laravel-blog/public';
     return [
         'position' => $faker->unique()->randomDigitNotNull,
-        'name' => $faker->language,
-        'lang_code' => $faker->languageCode,
-        'icon' => $faker->image($dir = '/images/languages', 'flags')
+        'name' => $faker->word,
+        'lang_code' => $faker->unique()->languageCode,
+        'icon' => $faker->image($dir = "${root}/images/languages", 'flags')
     ];
 });
 
 $factory->define(\LaravelBlog\Photo::class, function ($faker) {
     $faker->addProvider(new Blog($faker));
+    $root = '/home/vagrant/laravel-blog/public';
     return [
-        'position' => $faker->unique()->randomDigitNotNull,
+        'position' => $faker->randomDigitNotNull,
         'slider' => $faker->boolean(25),
-        'filename' => $faker->image('/images/photos', 1920, 1080, 'photos', true, 'Faker'),
+        'filename' => $faker->image("${root}/images/photos", 1920, 1080, 'photos', true, 'Faker'),
         'name' => $faker->title(3),
         'description' => $faker->text(250)
         ];
@@ -82,7 +84,7 @@ $factory->define(\LaravelBlog\Photo::class, function ($faker) {
 $factory->define(\LaravelBlog\Album::class, function ($faker) {
     $faker->addProvider(new Blog($faker));
     return [
-        'position' => $faker->unique()->randomDigitNotNull,
+        'position' => $faker->randomDigitNotNull,
         'name' => $faker->title(4),
         'description' => $faker->text(180),
         'folder_id' => str_random(120)

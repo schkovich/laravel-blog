@@ -13,13 +13,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         $this->call('BloggerTableSeeder');
         $this->call('BlogTableSeeder');
         $this->call('BlogCategoryTableSeeder');
         $this->call('LanguageTableSeeder');
+        $this->call('AlbumTableSeeder');
         $this->call('PhotoTableSeeder');
-
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         Model::reguard();
     }
 }

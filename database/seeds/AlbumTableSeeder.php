@@ -11,6 +11,6 @@ class AlbumTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('LaravelBlog\Album', 11)->create();
     }
 }

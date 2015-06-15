@@ -35,6 +35,6 @@ class CreateBloggersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bloggers');
+        Schema::dropIfExists('bloggers');
     }
 }

@@ -11,6 +11,6 @@ class BlogCategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('LaravelBlog\BlogCategory', 26)->create();
     }
 }

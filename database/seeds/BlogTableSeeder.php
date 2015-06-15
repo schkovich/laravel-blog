@@ -11,6 +11,6 @@ class BlogTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory('LaravelBlog\Blog', 101)->create();
     }
 }
