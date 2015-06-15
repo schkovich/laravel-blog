@@ -39,7 +39,7 @@ class Blog extends Model {
      * @return Blogger
      */
     public function author() {
-        return $this->belongsTo('LaravelBlog\Blogger', 'user_id');
+        return $this->belongsTo('LaravelBlog\Blogger', 'blogger_id');
     }
 
     /**
