@@ -75,7 +75,7 @@ $factory->define(\LaravelBlog\Photo::class, function ($faker) {
     return [
         'position' => $faker->randomDigitNotNull,
         'slider' => $faker->boolean(25),
-        'filename' => $faker->image("${root}/images/photos", 1920, 1080, 'photos', true, 'Faker'),
+        'filename' => $faker->image("${root}/images/photos", 1920, 1080),
         'name' => $faker->title(3),
         'description' => $faker->text(250)
         ];
