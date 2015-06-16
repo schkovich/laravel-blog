@@ -5,6 +5,8 @@
 .env
 /vendor
 /node_modules
+/storage
+/bootstrap/cache
 
 ### symlink to Homestead configuration file
 Homestead.yaml

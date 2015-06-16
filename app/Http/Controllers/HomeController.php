@@ -34,10 +34,7 @@ class HomeController extends Controller
     public function index()
     {
         $blogs = Blog::with('author')->orderBy('position', 'DESC')->orderBy('created_at', 'DESC')->limit(4)->get();
-
         return view('pages.home', compact('blogs', 'sliders'));
-
-        return view('pages.welcome');
     }
 
 }
