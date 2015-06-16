@@ -24,27 +24,27 @@ Dashboard</span>
         </a>
     </li>
     <li {{ (Request::is('admin/blogs*') ? ' class=active' : '') }}>
-        <a href="#">
-            <i class="glyphicon glyphicon-bullhorn"></i> News items<span
+        <a href="{{URL::to('admin/blogs')}}">
+            <i class="glyphicon glyphicon-bullhorn"></i> Blogs items<span
                     class="fa arrow"></span>
         </a>
         <ul class="nav nav-second-level collapse">
             <li {{ (Request::is('admin/blogscategory') ? ' class=active' : '') }} >
                 <a href="{{URL::to('admin/blogscategory')}}">
                     <i class="glyphicon glyphicon-list"></i><span
-                            class="hidden-sm text"> News categories </span>
+                            class="hidden-sm text"> Blogs categories </span>
                 </a>
             </li>
             <li {{ (Request::is('admin/blogs') ? ' class=active' : '') }} >
                 <a href="{{URL::to('admin/blogs')}}">
                     <i class="glyphicon glyphicon-bullhorn"></i><span
-                            class="hidden-sm text"> News</span>
+                            class="hidden-sm text"> Blogs</span>
                 </a>
             </li>
         </ul>
     </li>
     <li {{ (Request::is('admin/photo*') ? ' class=active' : '') }}>
-        <a href="#">
+        <a href="{{URL::to('admin/photos')}}">
             <i class="glyphicon glyphicon-camera"></i> Photo items<span
                     class="fa arrow"></span>
         </a>

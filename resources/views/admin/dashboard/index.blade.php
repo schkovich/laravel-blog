@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{URL::to('admin/newscategory')}}">
+                <a href="{{URL::to('admin/blogscategory')}}">
                     <div class="panel-footer">
                         <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{URL::to('admin/photo')}}">
+                <a href="{{URL::to('admin/photos')}}">
                     <div class="panel-footer">
                         <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
