@@ -8,7 +8,7 @@
 
     @if(count($blogs)>0)
         <div class="row">
-            <h2>News</h2>
+            <h2>Blogs</h2>
             @foreach ($blogs as $blog)
                 <div class="col-md-6">
                     <div class="row">

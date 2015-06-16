@@ -16,3 +16,6 @@
 //});
 
 Route::get('/', 'HomeController@index');
+
+Route::pattern('id', '[0-9]+');
+Route::get('blogs/{id}', 'BlogsController@show');
