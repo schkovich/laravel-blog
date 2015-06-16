@@ -52,15 +52,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::get('blogscategory/data', 'BlogCategoriesController@data');
     Route::get('blogscategory/reorder', 'BlogCategoriesController@getReorder');
     # Blogs
-    Route::get('blogs', 'BlogssController@index');
-    Route::get('blogs/create', 'BlogssController@getCreate');
-    Route::post('blogs/create', 'BlogssController@postCreate');
-    Route::get('blogs/{id}/edit', 'BlogssController@getEdit');
-    Route::post('blogs/{id}/edit', 'BlogssController@postEdit');
-    Route::get('blogs/{id}/delete', 'BlogssController@getDelete');
-    Route::post('blogs/{id}/delete', 'BlogssController@postDelete');
-    Route::get('blogs/data', 'BlogssController@data');
-    Route::get('blogs/reorder', 'BlogssController@getReorder');
+    Route::get('blogs', 'BlogsController@index');
+    Route::get('blogs/create', 'BlogsController@getCreate');
+    Route::post('blogs/create', 'BlogsController@postCreate');
+    Route::get('blogs/{id}/edit', 'BlogsController@getEdit');
+    Route::post('blogs/{id}/edit', 'BlogsController@postEdit');
+    Route::get('blogs/{id}/delete', 'BlogsController@getDelete');
+    Route::post('blogs/{id}/delete', 'BlogsController@postDelete');
+    Route::get('blogs/data', 'BlogsController@data');
+    Route::get('blogs/reorder', 'BlogsController@getReorder');
     # Album
     Route::get('album', 'AlbumController@index');
     Route::get('album/create', 'AlbumController@getCreate');
