@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: goran
+ * Date: 16/06/15
+ * Time: 08:16
+ */
+
+namespace LaravelBlog\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class DeleteRequest extends FormRequest {
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'id' => 'required|integer',
+        ];
+    }
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+}
