@@ -27,4 +27,12 @@ class BlogsController extends Controller
         return view('blogs.show', compact('blog'));
     }
 
+    public function data($offset = 10)
+    {
+        $blogs = Blog::with('author')->orderBy('position', 'DESC')
+            ->orderBy('created_at', 'DESC')
+            ->offset($offset)
+            ->limit(10)->get();
+        return response()->json($blogs);
+    }
 }
