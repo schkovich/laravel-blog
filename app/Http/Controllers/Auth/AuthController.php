@@ -52,7 +52,7 @@ class AuthController extends Controller
      *
      * @param  array  $data
      *
-*@return Blogger
+     * @return Blogger
      */
     protected function create(array $data)
     {

@@ -29,5 +29,6 @@ class Kernel extends HttpKernel
         'auth' => \LaravelBlog\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \LaravelBlog\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => '\LaravelBlog\Http\Middleware\Admin'
     ];
 }
