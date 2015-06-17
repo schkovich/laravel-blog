@@ -157,7 +157,6 @@ class BlogsController extends AdminController {
                        ->join('blog_categories', 'blog_categories.id', '=', 'blogs.blog_category_id')
                        ->select(array('blogs.id','blogs.title','blog_categories.title as category', 'languages.name', 'blogs.created_at'))
                        ->orderBy('blogs.position', 'ASC');
-
         return Datatables::of($blogs)
                          ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a>
                     <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>

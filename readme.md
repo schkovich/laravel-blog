@@ -1,3 +1,5 @@
+# laravel-blog
+A simple Laravel based blog
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
