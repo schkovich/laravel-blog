@@ -11,7 +11,7 @@ namespace LaravelBlog\Http\Controllers\Admin;
 
 use LaravelBlog\Http\Controllers\AdminController;
 use LaravelBlog\Blog;
-use LaravelBlog\BllogCategory;
+use LaravelBlog\BlogCategory;
 use LaravelBlog\Language;
 use Illuminate\Support\Facades\Input;
 use LaravelBlog\Http\Requests\Admin\BlogRequest;
@@ -43,20 +43,20 @@ class BlogsController extends AdminController {
         $blogscategories = BlogCategory::all();
         $blogscategory = "";
         // Show the page
-        return view('admin.news.create_edit', compact('languages', 'language','blogscategories','blogscategory'));
+        return view('admin.blogs.create_edit', compact('languages', 'language','blogscategories','blogscategory'));
     }
     /**
      * Store a newly created resource in storage.
      *
      * @return Response
      */
-    public function postCreate(BlogsRequest $request)
+    public function postCreate(BlogRequest $request)
     {
         $blogs = new Blog();
         $blogs -> user_id = Auth::id();
         $blogs -> language_id = $request->language_id;
         $blogs -> title = $request->title;
-        $blogs -> article_category_id = $request->newscategory_id;
+        $blogs -> blog_category_id = $request->blogscategory_id;
         $blogs -> introduction = $request->introduction;
         $blogs -> content = $request->content;
         $blogs -> source = $request->source;
@@ -72,7 +72,7 @@ class BlogsController extends AdminController {
         $blogs -> save();
         if(Input::hasFile('picture'))
         {
-            $destinationPath = public_path() . '/images/blogs/'.$blog->id.'/';
+            $destinationPath = public_path() . '/images/blogs/'.$blogs->id.'/';
             Input::file('picture')->move($destinationPath, $picture);
         }
     }
@@ -88,8 +88,8 @@ class BlogsController extends AdminController {
         $languages = Language::all();
         $language = $blogs->language_id;
         $blogscategories = BlogCategory::all();
-        $blogscategory = $blogs->newscategory_id;
-        return view('admin.news.create_edit',compact('news','languages','language','newscategories','newscategory'));
+        $blogscategory = $blogs->blogscategory_id;
+        return view('admin.blogs.create_edit',compact('blogs','languages','language','blogscategories','blogscategory'));
     }
     /**
      * Update the specified resource in storage.
@@ -103,7 +103,7 @@ class BlogsController extends AdminController {
         $blogs -> user_id = Auth::id();
         $blogs -> language_id = $request->language_id;
         $blogs -> title = $request->title;
-        $blogs -> article_category_id = $request->newscategory_id;
+        $blogs -> blog_category_id = $request->blogscategory_id;
         $blogs -> introduction = $request->introduction;
         $blogs -> content = $request->content;
         $blogs -> source = $request->source;
@@ -119,7 +119,7 @@ class BlogsController extends AdminController {
         $blogs -> save();
         if(Input::hasFile('picture'))
         {
-            $destinationPath = public_path() . '/images/news/'.$blogs->id.'/';
+            $destinationPath = public_path() . '/images/blogs/'.$blogs->id.'/';
             Input::file('picture')->move($destinationPath, $picture);
         }
     }
@@ -133,7 +133,7 @@ class BlogsController extends AdminController {
     {
         $blogs = Blog::find($id);
         // Show the page
-        return view('admin.news.delete', compact('news'));
+        return view('admin.blogs.delete', compact('blogs'));
     }
     /**
      * Remove the specified resource from storage.
@@ -153,13 +153,14 @@ class BlogsController extends AdminController {
      */
     public function data()
     {
-        $blogs = Blog::join('languages', 'languages.id', '=', 'articles.language_id')
-                       ->join('article_categories', 'article_categories.id', '=', 'articles.article_category_id')
-                       ->select(array('articles.id','articles.title','article_categories.title as category', 'languages.name', 'articles.created_at'))
-                       ->orderBy('articles.position', 'ASC');
+        $blogs = Blog::join('languages', 'languages.id', '=', 'blogs.language_id')
+                       ->join('blog_categories', 'blog_categories.id', '=', 'blogs.blog_category_id')
+                       ->select(array('blogs.id','blogs.title','blog_categories.title as category', 'languages.name', 'blogs.created_at'))
+                       ->orderBy('blogs.position', 'ASC');
+
         return Datatables::of($blogs)
-                         ->add_column('actions', '<a href="{{{ URL::to(\'admin/news/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a>
-                    <a href="{{{ URL::to(\'admin/news/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>
+                         ->add_column('actions', '<a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a>
+                    <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>
                     <input type="hidden" name="row" value="{{$id}}" id="row">')
                          ->remove_column('id')
                          ->make();

@@ -11,7 +11,7 @@ namespace LaravelBlog\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogsRequest extends FormRequest {
+class BlogRequest extends FormRequest {
 
     /**
      * Get the validation rules that apply to the request.

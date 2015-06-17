@@ -46,21 +46,18 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/blogs/data/') }}",
-                "fnDrawCallback": function (oSettings) {
-                    $(".iframe").colorbox({
-                        iframe: true,
-                        width: "80%",
-                        height: "80%",
-                        onClosed: function () {
-                            window.location.reload();
-                        }
-                    });
-                }
+                "columns": [
+                    {data: 'title', name: 'username'},
+                    {data: 'category', name: 'category'},
+                    {data: 'name', name: 'language'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'actions', orderable: false, searchable: false}
+                ]
             });
 
             var startPosition;
             var endPosition;
-            $("#table tbody").sortable({
+            $("#blogs tbody").sortable({
                 cursor: "move",
                 start: function (event, ui) {
                     startPosition = ui.item.prevAll().length + 1;
@@ -78,5 +75,8 @@
                 }
             });
         });
+        $.fn.DataTable.ext.errMode = function ( settings, helpPage, message ) {
+            console.log(message);
+        };
     </script>
 @stop

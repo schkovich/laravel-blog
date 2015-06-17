@@ -39,10 +39,10 @@
 
     {{--<script src="{{asset('assets/admin/js/jquery.dataTables.min.js')}}"></script>--}}
     {{--<script src="{{asset('assets/admin/js/dataTables.bootstrap.js')}}"></script>--}}
-    <script src="{{asset('assets/admin/js/bootstrap-dataTables-paging.js')}}"></script>
-    <script src="{{asset('assets/admin/js/datatables.fnReloadAjax.js')}}"></script>
-    <script src="{{asset('assets/admin/js/jquery.colorbox.js')}}"></script>
-    <script src="{{asset('assets/admin/js/modal.js')}}"></script>
+    {{--<script src="{{asset('assets/admin/js/bootstrap-dataTables-paging.js')}}"></script>--}}
+    {{--<script src="{{asset('assets/admin/js/datatables.fnReloadAjax.js')}}"></script>--}}
+    {{--<script src="{{asset('assets/admin/js/jquery.colorbox.js')}}"></script>--}}
+    {{--<script src="{{asset('assets/admin/js/modal.js')}}"></script>--}}
 
 
 

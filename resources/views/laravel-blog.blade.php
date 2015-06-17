@@ -18,12 +18,12 @@
     {{--		<link href="{{ asset('/css/all.css') }}" rel="stylesheet">--}}
     <link href="{{asset('css/all.css')}}" rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="{{asset('assets/site/css/half-slider.css')}}">
-    <link rel="stylesheet"
-          href="{{asset('assets/site/css/justifiedGallery.min.css')}}"/>
-    <link rel="stylesheet"
-          href="{{asset('assets/site/css/lightbox.min.css')}}"/>
+    {{--<link rel="stylesheet"--}}
+          {{--href="{{asset('assets/site/css/half-slider.css')}}">--}}
+    {{--<link rel="stylesheet"--}}
+          {{--href="{{asset('assets/site/css/justifiedGallery.min.css')}}"/>--}}
+    {{--<link rel="stylesheet"--}}
+          {{--href="{{asset('assets/site/css/lightbox.min.css')}}"/>--}}
 
     @yield('styles')
 
@@ -52,8 +52,8 @@
 {{--<script src="{{ asset('/js/all.js') }}"></script>--}}
 <script src="{{ asset('js/all.js') }}"></script>
 
-<script src="{{asset('assets/site/js/jquery.justifiedGallery.min.js')}}"></script>
-<script src="{{asset('assets/site/js/lightbox.min.js')}}"></script>
+{{--<script src="{{asset('assets/site/js/jquery.justifiedGallery.min.js')}}"></script>--}}
+{{--<script src="{{asset('assets/site/js/lightbox.min.js')}}"></script>--}}
 
 <script>
     $('#flash-overlay-modal').modal();
