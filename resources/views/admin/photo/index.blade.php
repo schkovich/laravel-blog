@@ -1,20 +1,18 @@
 @extends('admin.layouts.default')
 
 {{-- Web site Title --}}
-@section('title') {{{ trans("admin/blogs.blogs") }}} :: @parent @stop
+@section('title') {{{ trans("admin/photo.photo") }}} @parent @stop
 
 {{-- Content --}}
 @section('main')
     <div class="page-header">
         <h3>
-            {{{ trans("admin/blogs.blogs") }}}
+            {{{ trans("admin/photo.photo") }}}
             <div class="pull-right">
-                <div class="pull-right">
-                    <a href="{{{ URL::to('admin/blogs/create') }}}"
-                       class="btn btn-sm  btn-primary iframe"><span
-                                class="glyphicon glyphicon-plus-sign"></span> {{
-					trans("admin/modal.new") }}</a>
-                </div>
+                <a href="{{{ URL::to('admin/photo/create') }}}"
+                   class="btn btn-sm  btn-primary iframe"><span
+                            class="glyphicon glyphicon-plus-sign"></span> {{
+				trans("admin/modal.new") }}</a>
             </div>
         </h3>
     </div>
@@ -22,11 +20,13 @@
     <table id="table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th>{{ trans("admin/modal.title") }}</th>
-            <th>{{ trans("admin/blogs.category") }}</th>
-            <th>{{ trans("admin/admin.language") }}</th>
-            <th>{{ trans("admin/admin.created_at") }}</th>
-            <th>{{ trans("admin/admin.action") }}</th>
+            <th>{{{ trans("admin/modal.title") }}}</th>
+            <th>{{{ trans("admin/photo.album") }}}</th>
+            <th>{{{ trans("admin/photo.album_cover") }}}</th>
+            <th>{{{ trans("admin/photo.slider") }}}</th>
+            <th>{{{ trans("admin/admin.language") }}}</th>
+            <th>{{{ trans("admin/admin.created_at") }}}</th>
+            <th>{{{ trans("admin/admin.action") }}}</th>
         </tr>
         </thead>
     </table>
@@ -44,11 +44,14 @@
 
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ URL::to('admin/blogs/data/') }}",
+                "ajax": "{{ URL::to('admin/photo/data/'.((isset($album))?$album->id:0)) }}",
                 "columns": [
-                    {data: 'title', name: 'Title'},
-                    {data: 'category', name: 'category'},
-                    {data: 'name', name: 'language'},
+                    {data: 'albumid'},
+                    {data: 'name'},
+                    {data: 'category'},
+                    {data: 'album_cover'},
+                    {data: 'slider'},
+                    {data: 'language'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'actions', orderable: false, searchable: false}
                 ],
@@ -62,9 +65,7 @@
                         }
                     });
                 }
-
             });
-
             var startPosition;
             var endPosition;
             $("#table tbody").sortable({
@@ -78,16 +79,12 @@
                     $('#table #row').each(function (i) {
                         navigationList = navigationList + ',' + $(this).val();
                     });
-                    $.getJSON("{{ URL::to('admin/blogs/reorder') }}", {
+                    $.getJSON("{{ URL::to('admin/photo/reorder') }}", {
                         list: navigationList
                     }, function (data) {
-                        console.debug(data);
                     });
                 }
             });
         });
-        $.fn.DataTable.ext.errMode = function ( settings, helpPage, message ) {
-            console.log(message);
-        };
     </script>
 @stop
