@@ -58,6 +58,7 @@ class BlogsController extends AdminController {
         $blogs -> title = $request->title;
         $blogs -> blog_category_id = $request->blogscategory_id;
         $blogs -> introduction = $request->introduction;
+//      @todo: Object Request has protected property content. Consider renaming column to blog_content.
         $blogs -> content = $request->content;
         $blogs -> source = $request->source;
         $picture = "";
@@ -162,7 +163,7 @@ class BlogsController extends AdminController {
                     <a href="{{{ URL::to(\'admin/blogs/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>
                     <input type="hidden" name="row" value="{{$id}}" id="row">')
                          ->remove_column('id')
-                         ->make();
+                         ->make(true);
     }
     /**
      * Reorder items

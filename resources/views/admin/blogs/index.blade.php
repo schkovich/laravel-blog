@@ -29,7 +29,6 @@
             <th>{{ trans("admin/admin.action") }}</th>
         </tr>
         </thead>
-        <tbody></tbody>
     </table>
 @stop
 
