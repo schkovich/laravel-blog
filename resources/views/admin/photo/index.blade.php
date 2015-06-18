@@ -46,7 +46,6 @@
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/photo/data/'.((isset($album))?$album->id:0)) }}",
                 "columns": [
-                    {data: 'albumid'},
                     {data: 'name'},
                     {data: 'category'},
                     {data: 'album_cover'},
@@ -86,5 +85,8 @@
                 }
             });
         });
+        $.fn.DataTable.ext.errMode = function ( settings, helpPage, message ) {
+            console.log(message);
+        };
     </script>
 @stop

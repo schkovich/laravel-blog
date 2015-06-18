@@ -73,7 +73,7 @@ class PhotoController extends AdminController
         $photo->user_id        = Auth::id();
         $photo->language_id    = $request->language_id;
         $photo->name           = $request->name;
-        $photo->photo_album_id = $request->photo_album_id;
+        $photo->album_id       = $request->album_id;
         $photo->description    = $request->description;
         $photo->slider         = $request->slider;
         $photo->album_cover    = $request->album_cover;
@@ -87,7 +87,7 @@ class PhotoController extends AdminController
         $photo->filename = $picture;
         $photo->save();
         if($request->hasFile('image')) {
-            $photoalbum      = PhotoAlbum::find($request->photo_album_id);
+            $photoalbum      = PhotoAlbum::find($request->album_id);
             $destinationPath = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/';
             $request->file('image')->move($destinationPath, $picture);
             $path2 = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/thumbs/';
@@ -108,7 +108,7 @@ class PhotoController extends AdminController
         $languages   = Language::all();
         $language    = $photo->language_id;
         $photoalbums = PhotoAlbum::all();
-        $photoalbum  = $photo->photo_album_id;
+        $photoalbum  = $photo->album_id;
 
         return view('admin.photo.create_edit', compact('photo', 'languages', 'language', 'photoalbums', 'photoalbum'));
     }
@@ -126,7 +126,7 @@ class PhotoController extends AdminController
         $photo->user_id        = Auth::id();
         $photo->language_id    = $request->language_id;
         $photo->name           = $request->name;
-        $photo->photo_album_id = $request->photo_album_id;
+        $photo->album_id       = $request->album_id;
         $photo->description    = $request->description;
         $photo->slider         = $request->slider;
         $photo->album_cover    = $request->album_cover;
@@ -140,7 +140,7 @@ class PhotoController extends AdminController
         $photo->filename = $picture;
         $photo->save();
         if($request->hasFile('image')) {
-            $photoalbum      = PhotoAlbum::find($request->photo_album_id);
+            $photoalbum      = PhotoAlbum::find($request->album_id);
             $destinationPath = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/';
             $request->file('image')->move($destinationPath, $picture);
             $path2 = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/thumbs/';
@@ -186,7 +186,7 @@ class PhotoController extends AdminController
     public function getAlbumCover($id, $album = 0)
     {
         $photo       = Photo::find($id);
-        $photoalbums = Photo::where('photo_album_id', $photo->photo_album_id)->get();
+        $photoalbums = Photo::where('album_id', $photo->album_id)->get();
         foreach ($photoalbums as $item) {
             $item->album_cover = 0;
             $item->save();
@@ -217,14 +217,14 @@ class PhotoController extends AdminController
     {
         $condition  = ( intval($albumid) == 0 ) ? ">" : "=";
         $photoalbum = Photo::join('languages', 'languages.id', '=', 'photos.language_id')
-                           ->join('photo_albums', 'photo_albums.id', '=', 'photos.photo_album_id')
-                           ->where('photos.photo_album_id', $condition, $albumid)
+                           ->join('albums', 'albums.id', '=', 'photos.album_id')
+                           ->where('photos.album_id', $condition, $albumid)
                            ->orderBy('photos.position')
                            ->select(array(
                                'photos.id',
                                DB::raw($albumid . ' as albumid'),
                                DB::getTablePrefix() . 'photos.name',
-                               'photo_albums.name as category',
+                               'albums.name as category',
                                DB::getTablePrefix() . 'photos.album_cover',
                                DB::getTablePrefix() . 'photos.slider',
                                'languages.name as language',
