@@ -18,7 +18,7 @@ use LaravelBlog\Http\Requests\Admin\PhotoRequest;
 use LaravelBlog\Http\Requests\Admin\ReorderRequest;
 use LaravelBlog\Language;
 use LaravelBlog\Photo;
-use LaravelBlog\PhotoAlbum;
+use LaravelBlog\Album;
 
 class PhotoController extends AdminController
 {
@@ -55,22 +55,22 @@ class PhotoController extends AdminController
     {
         $languages   = Language::all();
         $language    = "";
-        $photoalbums = PhotoAlbum::all();
-        $photoalbum  = "";
+        $albums = Album::all();
+        $album  = "";
 
         // Show the page
-        return view('admin.photo.create_edit', compact('languages', 'language', 'photoalbums', 'photoalbum'));
+        return view('admin.photo.create_edit', compact('languages', 'language', 'albums', 'album'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param PhotoRequest $request
      */
     public function postCreate(PhotoRequest $request)
     {
         $photo                 = new Photo();
-        $photo->user_id        = Auth::id();
+        $photo->blogger_id        = Auth::id();
         $photo->language_id    = $request->language_id;
         $photo->name           = $request->name;
         $photo->album_id       = $request->album_id;
@@ -78,6 +78,8 @@ class PhotoController extends AdminController
         $photo->slider         = $request->slider;
         $photo->album_cover    = $request->album_cover;
         $picture               = "";
+        var_dump($photo);
+        exit;
         if($request->hasFile('image')) {
             $file      = $request->file('image');
             $filename  = $file->getClientOriginalName();
@@ -87,10 +89,10 @@ class PhotoController extends AdminController
         $photo->filename = $picture;
         $photo->save();
         if($request->hasFile('image')) {
-            $photoalbum      = PhotoAlbum::find($request->album_id);
-            $destinationPath = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/';
+            $album      = Album::find($request->album_id);
+            $destinationPath = public_path() . '/appfiles/album/' . $album->folder_id . '/';
             $request->file('image')->move($destinationPath, $picture);
-            $path2 = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/thumbs/';
+            $path2 = public_path() . '/appfiles/album/' . $album->folder_id . '/thumbs/';
             Thumbnail::generate_image_thumbnail($destinationPath . $picture, $path2 . $picture);
         }
     }
@@ -107,10 +109,10 @@ class PhotoController extends AdminController
         $photo       = Photo::find($id);
         $languages   = Language::all();
         $language    = $photo->language_id;
-        $photoalbums = PhotoAlbum::all();
-        $photoalbum  = $photo->album_id;
+        $albums = Album::all();
+        $album  = $photo->album_id;
 
-        return view('admin.photo.create_edit', compact('photo', 'languages', 'language', 'photoalbums', 'photoalbum'));
+        return view('admin.photo.create_edit', compact('photo', 'languages', 'language', 'albums', 'album'));
     }
 
     /**
@@ -123,7 +125,7 @@ class PhotoController extends AdminController
     public function postEdit(PhotoRequest $request, $id)
     {
         $photo                 = Photo::find($id);
-        $photo->user_id        = Auth::id();
+        $photo->blogger_id        = Auth::id();
         $photo->language_id    = $request->language_id;
         $photo->name           = $request->name;
         $photo->album_id       = $request->album_id;
@@ -140,10 +142,10 @@ class PhotoController extends AdminController
         $photo->filename = $picture;
         $photo->save();
         if($request->hasFile('image')) {
-            $photoalbum      = PhotoAlbum::find($request->album_id);
-            $destinationPath = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/';
+            $album      = Album::find($request->album_id);
+            $destinationPath = public_path() . '/appfiles/album/' . $album->folder_id . '/';
             $request->file('image')->move($destinationPath, $picture);
-            $path2 = public_path() . '/appfiles/photoalbum/' . $photoalbum->folder_id . '/thumbs/';
+            $path2 = public_path() . '/appfiles/album/' . $album->folder_id . '/thumbs/';
             Thumbnail::generate_image_thumbnail($destinationPath . $picture, $path2 . $picture);
         }
     }
@@ -186,8 +188,8 @@ class PhotoController extends AdminController
     public function getAlbumCover($id, $album = 0)
     {
         $photo       = Photo::find($id);
-        $photoalbums = Photo::where('album_id', $photo->album_id)->get();
-        foreach ($photoalbums as $item) {
+        $albums = Photo::where('album_id', $photo->album_id)->get();
+        foreach ($albums as $item) {
             $item->album_cover = 0;
             $item->save();
         }
@@ -216,7 +218,7 @@ class PhotoController extends AdminController
     public function data($albumid = 0)
     {
         $condition  = ( intval($albumid) == 0 ) ? ">" : "=";
-        $photoalbum = Photo::join('languages', 'languages.id', '=', 'photos.language_id')
+        $album = Photo::join('languages', 'languages.id', '=', 'photos.language_id')
                            ->join('albums', 'albums.id', '=', 'photos.album_id')
                            ->where('photos.album_id', $condition, $albumid)
                            ->orderBy('photos.position')
@@ -231,7 +233,7 @@ class PhotoController extends AdminController
                                DB::getTablePrefix() . 'photos.created_at'
                            ));
 
-        return Datatables::of($photoalbum)
+        return Datatables::of($album)
                          ->edit_column('album_cover',
                              '<a href="{{{ URL::to(\'admin/photo/\' . $id . \'/\' . $albumid . \'/albumcover\' ) }}}" class="btn btn-warning btn-sm" >@if ($album_cover=="1") <span class="glyphicon glyphicon-ok"></span> @else <span class=\'glyphicon glyphicon-remove\'></span> @endif</a>')
                          ->edit_column('slider',
