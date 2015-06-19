@@ -5,15 +5,15 @@
 			trans("admin/modal.general") }}</a></li>
     </ul>
     <!-- ./ tabs -->
-    {{-- Edit Blog Form --}}
-    <form class="form-horizontal" id="fupload" enctype="multipart/form-data"
-          method="post"
-          action="@if(isset($photo)){{ URL::to('admin/photo/'.$photo->id.'/edit') }}
-	        @else{{ URL::to('admin/photo/create') }}@endif"
-          autocomplete="off">
-        <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <!-- ./ csrf token -->
+    {{-- Edit Photo Form --}}
+        {!! Form::open(array(
+            'action' => isset($photo) ?
+                ['PhotoController@getCreate', $photo->id] : 'Admin\PhotoController@getCreate',
+            'method' => 'POST',
+            'files' => true,
+            'class' => "form-horizontal",
+            'id' => 'fupload'
+            )) !!}
         <!-- Tabs Content -->
         <div class="tab-content">
             <!-- General tab -->
@@ -22,15 +22,11 @@
                     <div class="form-group {{{ $errors->has('language_id') ? 'has-error' : '' }}}">
                         <div class="col-md-12">
                             <label class="control-label" for="language_id">{{
-							trans("admin/admin.language") }}</label> <select
-                                    style="width: 100%" name="language_id" id="language_id"
-                                    class="form-control"> @foreach($languages as $item)
-                                    <option value="{{$item->id}}"
-                                    @if(!empty($language))
-                                        @if($item->id==$language)
-                                            selected="selected" @endif @endif >{{$item->name}}</option>
-                                @endforeach
-                            </select>
+							trans("admin/admin.language") }}</label>
+                            {!! Form::select('language_id', $languages, null, [
+                                'style' => 'width: 100%',
+                                'id' => 'language_id'
+                                ]) !!}
                         </div>
                     </div>
                     <div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
@@ -133,5 +129,5 @@
                 </div>
             </div>    <!-- ./ form actions -->
         </div>
-    </form>
+    {{ Form::close() }}
 @stop

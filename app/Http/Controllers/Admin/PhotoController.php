@@ -53,7 +53,7 @@ class PhotoController extends AdminController
      */
     public function getCreate()
     {
-        $languages   = Language::all();
+        $languages   = Language::lists('name', 'id');
         $language    = "";
         $albums = Album::all();
         $album  = "";
