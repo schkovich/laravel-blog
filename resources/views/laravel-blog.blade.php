@@ -55,9 +55,21 @@
 {{--<script src="{{asset('assets/site/js/jquery.justifiedGallery.min.js')}}"></script>--}}
 {{--<script src="{{asset('assets/site/js/lightbox.min.js')}}"></script>--}}
 
-<script>
+<script type="text/javascript">
     $('#flash-overlay-modal').modal();
     $('div.alert').not('.alert-danger').delay(3000).slideUp(300);
+</script>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'novamedev';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
 </script>
 @yield('scripts')
 

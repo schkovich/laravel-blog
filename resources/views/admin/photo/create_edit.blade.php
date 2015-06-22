@@ -1,4 +1,6 @@
-@extends('admin.layouts.modal') {{-- Content --}} @section('content')
+@extends('admin.layouts.modal')
+{{-- Content --}}
+@section('content')
     <!-- Tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab-general" data-toggle="tab"> {{
@@ -38,11 +40,11 @@
                             {!!$errors->first('name', '<span class="help-block">:message </span>')!!}
                         </div>
                     </div>
-                    <div class="form-group {{{ $errors->has('photo_album_id') ? 'error' : '' }}}">
+                    <div class="form-group {{{ $errors->has('album_id') ? 'error' : '' }}}">
                         <div class="col-md-12">
-                            <label class="control-label" for="photo_album_id">{{
+                            <label class="control-label" for="album_id">{{
 							trans("admin/photo.album") }}</label> <select
-                                    style="width: 100%" name="photo_album_id" id="photo_album_id"
+                                    style="width: 100%" name="album_id" id="album_id"
                                     class="form-control"> @foreach($albums as $item)
                                     <option value="{{$item->id}}"
                                     @if(!empty($album))

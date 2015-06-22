@@ -22,7 +22,7 @@ class PhotoRequest extends FormRequest {
         return [
             'language_id' => 'required|integer',
             'album_id' => 'required|integer',
-        ];
+            'image'       => 'required|mimes:jpg',        ];
     }
 
     /**

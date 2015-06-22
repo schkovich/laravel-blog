@@ -57,7 +57,6 @@ class PhotoController extends AdminController
         $language    = "";
         $albums = Album::all();
         $album  = "";
-
         // Show the page
         return view('admin.photo.create_edit', compact('languages', 'language', 'albums', 'album'));
     }
@@ -78,8 +77,6 @@ class PhotoController extends AdminController
         $photo->slider         = $request->slider;
         $photo->album_cover    = $request->album_cover;
         $picture               = "";
-        var_dump($photo);
-        exit;
         if($request->hasFile('image')) {
             $file      = $request->file('image');
             $filename  = $file->getClientOriginalName();
@@ -90,9 +87,9 @@ class PhotoController extends AdminController
         $photo->save();
         if($request->hasFile('image')) {
             $album      = Album::find($request->album_id);
-            $destinationPath = public_path() . '/appfiles/album/' . $album->folder_id . '/';
+            $destinationPath = public_path() . '/images/photos/' . $album->folder_id . '/';
             $request->file('image')->move($destinationPath, $picture);
-            $path2 = public_path() . '/appfiles/album/' . $album->folder_id . '/thumbs/';
+            $path2 = public_path() . '/images/photos/' . $album->folder_id . '/thumbs/';
             Thumbnail::generate_image_thumbnail($destinationPath . $picture, $path2 . $picture);
         }
     }

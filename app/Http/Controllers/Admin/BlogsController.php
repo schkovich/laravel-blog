@@ -53,7 +53,7 @@ class BlogsController extends AdminController {
     public function postCreate(BlogRequest $request)
     {
         $blogs = new Blog();
-        $blogs -> user_id = Auth::id();
+        $blogs -> blogger_id = Auth::id();
         $blogs -> language_id = $request->language_id;
         $blogs -> title = $request->title;
         $blogs -> blog_category_id = $request->blogscategory_id;
@@ -73,7 +73,7 @@ class BlogsController extends AdminController {
         $blogs -> save();
         if(Input::hasFile('picture'))
         {
-            $destinationPath = public_path() . '/images/blogs/'.$blogs->id.'/';
+            $destinationPath = public_path() . '/images/photos/'.$blogs->id.'/';
             Input::file('picture')->move($destinationPath, $picture);
         }
     }
@@ -101,7 +101,7 @@ class BlogsController extends AdminController {
     public function postEdit(BlogsRequest $request, $id)
     {
         $blogs = Blog::find($id);
-        $blogs -> user_id = Auth::id();
+        $blogs -> blogger_id = Auth::id();
         $blogs -> language_id = $request->language_id;
         $blogs -> title = $request->title;
         $blogs -> blog_category_id = $request->blogscategory_id;

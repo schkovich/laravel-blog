@@ -29,7 +29,7 @@
 
                             <p>
                                 <a class="btn btn-mini btn-default"
-                                   href="{{URL::to('blogs/'.$blog->id.'')}}">Read more</a>
+                                   href="{{URL::to('blogs/'.$blog->id.'#disqus_thread')}}">Read more</a>
                             </p>
                         </div>
                     </div>

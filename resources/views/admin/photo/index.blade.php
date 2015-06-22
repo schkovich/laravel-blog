@@ -9,7 +9,7 @@
         <h3>
             {{{ trans("admin/photo.photo") }}}
             <div class="pull-right">
-                <a href="{{{ URL::to('admin/photo/create') }}}"
+                <a href="{{{ URL::to('admin/photo/edit') }}}"
                    class="btn btn-sm  btn-primary iframe"><span
                             class="glyphicon glyphicon-plus-sign"></span> {{
 				trans("admin/modal.new") }}</a>
