@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \LaravelBlog\Console\Commands\Inspire::class,
+        \LaravelBlog\Console\Commands\Publish::class,
     ];
 
     /**
@@ -26,5 +27,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+        $schedule->command('publish')->daily();
     }
 }

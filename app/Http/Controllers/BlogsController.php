@@ -22,7 +22,7 @@ class BlogsController extends Controller
     public function show($slug)
     {
         // Get all the blog posts
-        $blog = Blog::findBySlugOrId($slug);
+        $blog = Blog::findBySlugOrId($slug)->where('published', true);
 
         return view('blogs.show', compact('blog'));
     }
