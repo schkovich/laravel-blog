@@ -3,8 +3,17 @@
 namespace LaravelBlog;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Blog extends Model {
+class Blog extends Model implements SluggableInterface {
+
+    use SluggableTrait;
+
+    protected $sluggable = [
+        'build_from' => 'title',
+        'save_to'    => 'slug',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -58,5 +67,13 @@ class Blog extends Model {
      */
     public function category() {
         return $this->belongsTo('LaravelBlog\BlogCategory');
+    }
+    /**
+     * Convert the model to its string representation.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->title;
     }
 }

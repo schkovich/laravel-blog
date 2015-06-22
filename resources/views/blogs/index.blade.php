@@ -8,7 +8,7 @@
 
     @foreach($blogs as $blog)
         <article>
-            <h2><a href="{{action('ArticlesController@show', [$blog->id] . '#disqus_thread')}}"> {{ $blog->title }}</a></h2>
+            <h2><a href="{{action('ArticlesController@show', [$blog->slug] . '#disqus_thread')}}"> {{ $blog->title }}</a></h2>
 
             <div class="body">{{$blog->excerpt}}<div>
         </article>

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://laravel-blog.dev',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,7 +129,7 @@ return [
         'Illuminate\Pagination\PaginationServiceProvider',
         'Illuminate\Pipeline\PipelineServiceProvider',
         'Illuminate\Queue\QueueServiceProvider',
-        'Illuminate\Redis\RedisServiceProvider',
+//        'Illuminate\Redis\RedisServiceProvider',
         'Illuminate\Auth\Passwords\PasswordResetServiceProvider',
         'Illuminate\Session\SessionServiceProvider',
         'Illuminate\Translation\TranslationServiceProvider',
@@ -144,6 +144,8 @@ return [
         'Laracasts\Flash\FlashServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
 
         /*
          * Application Service Providers...
@@ -153,7 +155,6 @@ return [
         'LaravelBlog\Providers\ConfigServiceProvider',
         'LaravelBlog\Providers\EventServiceProvider',
         'LaravelBlog\Providers\RouteServiceProvider',
-        'Collective\Html\HtmlServiceProvider',
 
     ],
 

@@ -40,7 +40,10 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     LaravelBlog\Exceptions\Handler::class
 );
-
+$app->singleton(
+    'router',
+    '\Cviebrock\EloquentSluggable\SluggableRouter'
+);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

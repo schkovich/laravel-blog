@@ -19,10 +19,10 @@ class BlogsController extends Controller
         $this->middleware('auth', [ 'except' => [ 'index', 'show' ] ]);
     }
 
-    public function show($id)
+    public function show($slug)
     {
         // Get all the blog posts
-        $blog = Blog::find($id);
+        $blog = Blog::findBySlugOrId($slug);
 
         return view('blogs.show', compact('blog'));
     }

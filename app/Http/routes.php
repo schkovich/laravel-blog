@@ -19,7 +19,8 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
 Route::pattern('id', '[0-9]+');
-Route::get('blogs/{id}', 'BlogsController@show');
+Route::pattern('slug', '[A-Za-z-]+');
+Route::get('blogs/{slug}', 'BlogsController@show');
 //Route::get('photo/{id}', 'PhotoController@show');
 
 Route::controllers([

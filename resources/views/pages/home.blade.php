@@ -14,14 +14,14 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h4>
-                                <strong><a href="{{URL::to('blogs/'.$blog->id.'')}}">{!!
+                                <strong><a href="{{URL::to('blogs/'.$blog->slug.'')}}">{!!
                                         $blog->title !!}</a></strong>
                             </h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="{{URL::to('blogs/'.$blog->id.'')}}" class="thumbnail"><img
+                            <a href="{{URL::to('blogs/'.$blog->slug.'')}}" class="thumbnail"><img
                                         src="http://placehold.it/260x180" alt=""></a>
                         </div>
                         <div class="col-md-10">
@@ -29,7 +29,7 @@
 
                             <p>
                                 <a class="btn btn-mini btn-default"
-                                   href="{{URL::to('blogs/'.$blog->id.'#disqus_thread')}}">Read more</a>
+                                   href="{{URL::to('blogs/'.$blog->slug.'#disqus_thread')}}">Read more</a>
                             </p>
                         </div>
                     </div>
